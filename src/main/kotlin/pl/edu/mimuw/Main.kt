@@ -1,7 +1,10 @@
 package pl.edu.mimuw
 
-import pl.edu.mimuw.strategies.KeepGambling
-import pl.edu.mimuw.strategies.WiseMan
+import pl.edu.mimuw.blitz.BlitzGame
+import pl.edu.mimuw.blitz.Dice
+import pl.edu.mimuw.blitz.Player
+import pl.edu.mimuw.blitz.strategies.KeepGambling
+import pl.edu.mimuw.blitz.strategies.WiseMan
 
 fun main() {
     val blitzGame = BlitzGame(

@@ -1,4 +1,4 @@
-package pl.edu.mimuw
+package pl.edu.mimuw.blitz
 
 import pl.edu.mimuw.utils.Logger
 import kotlin.random.Random

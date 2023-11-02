@@ -1,4 +1,4 @@
-package pl.edu.mimuw
+package pl.edu.mimuw.blitz
 
 class GameStatistics {
     private val roleWins: MutableMap<Player.Role, Int> = mutableMapOf()

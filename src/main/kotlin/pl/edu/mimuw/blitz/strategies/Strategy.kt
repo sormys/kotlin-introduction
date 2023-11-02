@@ -1,9 +1,9 @@
-package pl.edu.mimuw.strategies
+package pl.edu.mimuw.blitz.strategies
 
-import pl.edu.mimuw.Player
+import pl.edu.mimuw.blitz.Player
 
-object KeepGambling : Strategy {
-    override fun shouldReRoll(
+interface Strategy {
+    fun shouldReRoll(
         playerRole: Player.Role,
         playerRoll: Int,
         opponentRoll: Int,
@@ -11,7 +11,5 @@ object KeepGambling : Strategy {
         playerPoints: Int,
         opponentPoints: Int,
         pointsToWin: Int
-    ): Boolean {
-        return true
-    }
+    ): Boolean
 }

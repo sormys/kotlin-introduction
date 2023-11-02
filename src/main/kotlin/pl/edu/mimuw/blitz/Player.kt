@@ -1,6 +1,6 @@
-package pl.edu.mimuw
+package pl.edu.mimuw.blitz
 
-import pl.edu.mimuw.strategies.Strategy
+import pl.edu.mimuw.blitz.strategies.Strategy
 import pl.edu.mimuw.utils.Logger
 
 class Player(
