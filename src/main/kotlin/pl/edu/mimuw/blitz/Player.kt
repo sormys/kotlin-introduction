@@ -59,7 +59,7 @@ class Player(
     }
 
     fun addPoint() {
-        points++;
+        points++
     }
 
     override fun toString(): String {

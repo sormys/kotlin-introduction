@@ -25,7 +25,7 @@ class GameStatistics {
         var statistics: String = "By $name:\n"
         for ((stat, won: Int) in map) {
             val percentOfWins: Float = (won.toFloat() / games.toFloat()) * 100
-            statistics += "$stat $percentOfWins% winned games\n"
+            statistics += "$stat $percentOfWins% games won \n"
         }
         return statistics
     }
