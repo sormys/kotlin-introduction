@@ -3,36 +3,48 @@ package pl.edu.mimuw
 class GameStatistics {
     private val roleWins: MutableMap<Player.Role, Int> = mutableMapOf()
     private var playerWins: MutableMap<Player, Int> = mutableMapOf()
-    private var wins = 0
+    var games = 0
+        private set
+    private val empty: Boolean
+            get() {
+                return games == 0
+            }
+
+    fun setup(players: Array<Player>){
+        for (role in Player.Role.entries) {
+            roleWins[role] = 0
+        }
+        for (player in players) {
+            playerWins[player] = 0
+        }
+    }
 
     fun addWin(player: Player){
         roleWins[player.role] = roleWins.getOrDefault(player.role, 0) + 1
         playerWins[player] = playerWins.getOrDefault(player, 0) + 1
-        wins++
+        games++
     }
 
-    private fun playerStatistics(): String {
-        var statistics: String = ""
-        for ((player: Player, won: Int) in playerWins) {
-            val percentOfWins: Float = (won.toFloat() / wins.toFloat()) * 100
-            statistics += "$player  $percentOfWins% winned games\n"
+    private fun statsMapToString(name: String, map: Map<out Any, Int>): String{
+        var statistics: String = "By $name:\n"
+        for ((stat, won: Int) in map) {
+            val percentOfWins: Float = (won.toFloat() / games.toFloat()) * 100
+            statistics += "$stat $percentOfWins% winned games\n"
         }
         return statistics
     }
 
-    private fun rolesStatistics(): String {
-        var statistics: String = ""
-        for ((role: Player.Role, won: Int) in roleWins) {
-            val percentOfWins: Float = (won.toFloat() / wins.toFloat()) * 100
-            statistics += "$role  $percentOfWins% winned games\n"
-        }
-        return statistics
+    fun clear() {
+        roleWins.clear()
+        playerWins.clear()
+        games = 0
     }
+
     override fun toString(): String {
-        return "Statistics of $wins games:\n" +
-                "By Roles:\n" +
-                rolesStatistics() +
-                "By Players:\n" +
-                playerStatistics()
+        if (empty)
+            return "No games were played"
+        return "Statistics of $games games:\n" +
+                statsMapToString("Roles", roleWins) +
+                statsMapToString("Players", playerWins)
     }
 }

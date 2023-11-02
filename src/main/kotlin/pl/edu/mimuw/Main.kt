@@ -1,15 +1,20 @@
 package pl.edu.mimuw
 
+import pl.edu.mimuw.strategies.KeepGambling
+import pl.edu.mimuw.strategies.WiseMan
+
 fun main() {
-    println("Hello Kotlin!")
-    Hello().greet()
-    val game = Game(
-        dice = Dice(6),
+    val blitzGame = BlitzGame(
         player1 = Player("Jacek", KeepGambling),
-        player2 = Player("Franek", KeepGambling),
+        player2 = Player("Franek", WiseMan),
         pointToWin = 4,
-        rounds = 10
         )
-    game.play()
-    game.showStatistics()
+    blitzGame.play(10, Dice(4))
+    blitzGame.showStatistics()
+    blitzGame.play(10, Dice(6))
+    blitzGame.showStatistics()
+    blitzGame.restart()
+    blitzGame.play(2, Dice(10))
+    blitzGame.play(2, Dice(16))
+    blitzGame.showStatistics()
 }

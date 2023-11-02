@@ -1,5 +1,8 @@
 package pl.edu.mimuw
 
+import pl.edu.mimuw.strategies.Strategy
+import pl.edu.mimuw.utils.Logger
+
 class Player(
     private val name: String = "Nobody",
     private var strategy: Strategy,
@@ -9,42 +12,38 @@ class Player(
         DEFENCE,
         NONE,
     }
-
     private var logger: Logger = Logger(toString())
     var role = Role.NONE
         set(value) {
             field = value
             logger.log("role changed to $value")
         }
-
     var points: Int = 0
         private set(value){
             field = value
             logger.log("points changed to $value")
         }
-
     var roll: Int = 0
+        private set
 
-    fun willReRoll(
+    fun reRoll(
         opponentRoll: Int,
         numberOfDiceSides: Int,
         opponentPoints: Int,
-        pointsToWin: Int
-    ): Boolean {
-        val reRoll = strategy.shouldReRoll(
-            playerRole = role,
-            playerRoll = roll,
-            opponentRoll = opponentRoll,
-            numberOfDiceSides = numberOfDiceSides,
-            playerPoints = points,
-            opponentPoints = opponentPoints,
-            pointsToWin = pointsToWin
-        )
-        if (reRoll)
-            logger.log("will reroll")
-        else
-            logger.log("won't reroll")
-        return reRoll
+        pointsToWin: Int,
+        dice: Dice
+    ) {
+        if (strategy.shouldReRoll(
+                playerRole = role,
+                playerRoll = roll,
+                opponentRoll = opponentRoll,
+                numberOfDiceSides = numberOfDiceSides,
+                playerPoints = points,
+                opponentPoints = opponentPoints,
+                pointsToWin = pointsToWin
+            )) {
+            rollDice(dice)
+        }
     }
 
     fun newGame(){
@@ -53,18 +52,13 @@ class Player(
         roll = 0
     }
 
-    fun endRound(isWinner: Boolean){
-        role = when (role) {
-            Role.ATTACK -> Role.DEFENCE
-            Role.DEFENCE -> Role.ATTACK
-            Role.NONE -> {
-                logger.log("role is NONE, skipping")
-                return
-            }
-        }
+    fun rollDice(dice: Dice) {
+        logger.log("is rolling")
+        roll = dice.roll()
+    }
 
-        if (isWinner)
-            points++
+    fun addPoint(){
+        points++;
     }
 
     override fun toString(): String {

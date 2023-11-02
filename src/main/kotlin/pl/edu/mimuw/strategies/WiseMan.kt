@@ -1,6 +1,8 @@
-package pl.edu.mimuw
+package pl.edu.mimuw.strategies
 
-object KeepGambling : Strategy{
+import pl.edu.mimuw.Player
+
+object WiseMan: Strategy {
     override fun shouldReRoll(
         playerRole: Player.Role,
         playerRoll: Int,
@@ -10,7 +12,7 @@ object KeepGambling : Strategy{
         opponentPoints: Int,
         pointsToWin: Int
     ): Boolean {
-        // Allin
-        return true
+        return playerRoll < opponentRoll ||
+                playerRole == Player.Role.DEFENCE && playerRoll == opponentRoll
     }
 }

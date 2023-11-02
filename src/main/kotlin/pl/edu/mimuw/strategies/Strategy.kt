@@ -1,4 +1,6 @@
-package pl.edu.mimuw
+package pl.edu.mimuw.strategies
+
+import pl.edu.mimuw.Player
 
 interface Strategy {
 fun shouldReRoll(

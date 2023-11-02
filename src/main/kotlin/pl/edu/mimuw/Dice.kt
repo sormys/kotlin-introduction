@@ -1,4 +1,5 @@
 package pl.edu.mimuw
+import pl.edu.mimuw.utils.Logger
 import kotlin.random.Random
 
 class Dice(val sides: Int) {
