@@ -12,6 +12,7 @@ class Player(
         DEFENCE,
         NONE,
     }
+
     private var logger: Logger = Logger(toString())
     var role = Role.NONE
         set(value) {
@@ -19,7 +20,7 @@ class Player(
             logger.log("role changed to $value")
         }
     var points: Int = 0
-        private set(value){
+        private set(value) {
             field = value
             logger.log("points changed to $value")
         }
@@ -41,12 +42,12 @@ class Player(
                 playerPoints = points,
                 opponentPoints = opponentPoints,
                 pointsToWin = pointsToWin
-            )) {
+            )
+        )
             rollDice(dice)
-        }
     }
 
-    fun newGame(){
+    fun newGame() {
         role = Role.NONE
         points = 0
         roll = 0
@@ -57,7 +58,7 @@ class Player(
         roll = dice.roll()
     }
 
-    fun addPoint(){
+    fun addPoint() {
         points++;
     }
 

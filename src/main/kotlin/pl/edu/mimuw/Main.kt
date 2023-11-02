@@ -8,7 +8,7 @@ fun main() {
         player1 = Player("Jacek", KeepGambling),
         player2 = Player("Franek", WiseMan),
         pointToWin = 4,
-        )
+    )
     blitzGame.play(10, Dice(4))
     blitzGame.showStatistics()
     blitzGame.play(10, Dice(6))

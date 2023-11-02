@@ -6,44 +6,39 @@ class BlitzGame(
     player1: Player,
     player2: Player,
     private val pointToWin: Int,
-    ) {
+) {
 
     private val logger: Logger = Logger("Game")
     private val statistics: GameStatistics = GameStatistics()
     private var players: Array<Player> = arrayOf(player1, player2)
     private var attackerId: Int = 0
-        set(value){
+        set(value) {
             field = value
             attacker.role = Player.Role.ATTACK
             defender.role = Player.Role.DEFENCE
         }
     private var gameDice: Dice = Dice(6)
     private val attacker: Player
-        get(){
-            return players[attackerId]
-        }
+        get() = players[attackerId]
     private val defender: Player
-        get() {
-            return players[1 - attackerId]
-        }
+        get() = players[1 - attackerId]
 
-    init{
+    init {
         statistics.setup(players)
     }
 
     private fun getOpponent(player: Player): Player {
-        if (player.role == Player.Role.ATTACK)
-            return defender
+        if (player.role == Player.Role.ATTACK) return defender
         return attacker
     }
 
-    private fun switchSides(){
+    private fun switchSides() {
         attackerId = 1 - attackerId
     }
 
-    fun play(rounds: Int, dice: Dice = Dice(6)){
+    fun play(rounds: Int, dice: Dice = Dice(6)) {
         gameDice = dice
-        for (i in 1..rounds){
+        for (i in 1..rounds) {
             logger.log("round $i (${statistics.games + 1} total) started!")
             prepareSides(i)
             simulateOneBlitz()
@@ -52,48 +47,46 @@ class BlitzGame(
         }
     }
 
-    private fun simulateOneBlitz(){
+    private fun simulateOneBlitz() {
         var roundEnded = false
-        while(!roundEnded){
+        while (!roundEnded) {
             simulateRound()
             roundEnded = summarizeRound()
         }
     }
 
-    private fun simulateRound(){
+    private fun simulateRound() {
         firstPart()
         secondPart()
         decideWinner()
         switchSides()
     }
 
-    private fun firstPart(){
+    private fun firstPart() {
         attacker.rollDice(gameDice)
         defender.rollDice(gameDice)
     }
 
-    private fun prepareSides(round: Int){
-        attackerId = 1 - (round)%2
+    private fun prepareSides(round: Int) {
+        attackerId = 1 - (round) % 2
         attacker.role = Player.Role.ATTACK
         defender.role = Player.Role.DEFENCE
     }
 
-    private fun secondPart(){
+    private fun secondPart() {
         optionalMove(attacker)
         optionalMove(defender)
     }
 
-    private fun decideWinner(){
-        if (attacker.roll >= defender.roll)
-            attacker.addPoint()
-        else
-            defender.addPoint()
+    private fun decideWinner() {
+        if (attacker.roll >= defender.roll) attacker.addPoint()
+        else defender.addPoint()
     }
 
-    private fun summarizeRound(): Boolean{
+    private fun summarizeRound(): Boolean {
         var endGame = false
-        for (player in players){
-            if (player.points >= pointToWin){
+        for (player in players) {
+            if (player.points >= pointToWin) {
                 endGame = true
                 statistics.addWin(player)
             }
@@ -112,22 +105,20 @@ class BlitzGame(
         )
     }
 
-    fun restart(){
-        attackerId = 0
+    fun restart() {
         restartPlayers()
-        attacker.role = Player.Role.ATTACK
-        defender.role = Player.Role.DEFENCE
+        attackerId = 0
         statistics.clear()
         statistics.setup(players)
     }
 
-    private fun restartPlayers(){
-        for (player in players){
+    private fun restartPlayers() {
+        for (player in players) {
             player.newGame()
         }
     }
 
-    fun showStatistics(){
+    fun showStatistics() {
         logger.log(statistics.toString())
     }
 }

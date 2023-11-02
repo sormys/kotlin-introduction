@@ -2,7 +2,7 @@ package pl.edu.mimuw.strategies
 
 import pl.edu.mimuw.Player
 
-object WiseMan: Strategy {
+object WiseMan : Strategy {
     override fun shouldReRoll(
         playerRole: Player.Role,
         playerRoll: Int,
