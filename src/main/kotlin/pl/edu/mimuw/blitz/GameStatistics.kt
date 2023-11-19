@@ -8,7 +8,7 @@ class GameStatistics {
     private val empty: Boolean
         get() = games == 0
 
-    fun setup(players: Array<Player>) {
+    fun setup(players: Iterable<Player>) {
         for (role in Player.Role.entries)
             roleWins[role] = 0
         for (player in players)
@@ -16,13 +16,15 @@ class GameStatistics {
     }
 
     fun addWin(player: Player) {
-        roleWins[player.role] = roleWins.getOrDefault(player.role, 0) + 1
+        if (player.role != null) {
+            roleWins[player.role!!] = roleWins.getOrDefault(player.role, 0) + 1
+        }
         playerWins[player] = playerWins.getOrDefault(player, 0) + 1
         games++
     }
 
     private fun statsMapToString(name: String, map: Map<out Any, Int>): String {
-        var statistics: String = "By $name:\n"
+        var statistics = "By $name:\n"
         for ((stat, won: Int) in map) {
             val percentOfWins: Float = (won.toFloat() / games.toFloat()) * 100
             statistics += "$stat $percentOfWins% games won \n"

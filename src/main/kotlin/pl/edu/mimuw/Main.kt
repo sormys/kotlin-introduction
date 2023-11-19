@@ -8,8 +8,8 @@ import pl.edu.mimuw.blitz.strategies.WiseMan
 
 fun main() {
     val blitzGame = BlitzGame(
-        player1 = Player("Jacek", KeepGambling),
-        player2 = Player("Franek", WiseMan),
+        attackPlayer = Player("Jacek", KeepGambling),
+        defencePlayer = Player("Franek", WiseMan),
         pointToWin = 4,
     )
     blitzGame.play(10, Dice(4))

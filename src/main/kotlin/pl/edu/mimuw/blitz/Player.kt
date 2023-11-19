@@ -10,11 +10,10 @@ class Player(
     enum class Role {
         ATTACK,
         DEFENCE,
-        NONE,
     }
 
     private var logger: Logger = Logger(toString())
-    var role = Role.NONE
+    var role: Role? = null
         set(value) {
             field = value
             logger.log("role changed to $value")
@@ -28,27 +27,15 @@ class Player(
         private set
 
     fun reRoll(
-        opponentRoll: Int,
-        numberOfDiceSides: Int,
-        opponentPoints: Int,
-        pointsToWin: Int,
+        gameState: PlayerGameState,
         dice: Dice
     ) {
-        if (strategy.shouldReRoll(
-                playerRole = role,
-                playerRoll = roll,
-                opponentRoll = opponentRoll,
-                numberOfDiceSides = numberOfDiceSides,
-                playerPoints = points,
-                opponentPoints = opponentPoints,
-                pointsToWin = pointsToWin
-            )
-        )
+        if (strategy.shouldReRoll(gameState))
             rollDice(dice)
     }
 
     fun newGame() {
-        role = Role.NONE
+        role = null
         points = 0
         roll = 0
     }
@@ -56,6 +43,7 @@ class Player(
     fun rollDice(dice: Dice) {
         logger.log("is rolling")
         roll = dice.roll()
+        logger.log("rolled $roll")
     }
 
     fun addPoint() {

@@ -1,15 +1,9 @@
 package pl.edu.mimuw.blitz.strategies
 
-import pl.edu.mimuw.blitz.Player
+import pl.edu.mimuw.blitz.PlayerGameState
 
-interface Strategy {
+fun interface Strategy {
     fun shouldReRoll(
-        playerRole: Player.Role,
-        playerRoll: Int,
-        opponentRoll: Int,
-        numberOfDiceSides: Int,
-        playerPoints: Int,
-        opponentPoints: Int,
-        pointsToWin: Int
+        gameState: PlayerGameState
     ): Boolean
 }

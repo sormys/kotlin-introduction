@@ -3,37 +3,32 @@ package pl.edu.mimuw.blitz
 import pl.edu.mimuw.utils.Logger
 
 class BlitzGame(
-    player1: Player,
-    player2: Player,
+    private var attackPlayer: Player,
+    private var defencePlayer: Player,
     private val pointToWin: Int,
 ) {
 
     private val logger: Logger = Logger("Game")
     private val statistics: GameStatistics = GameStatistics()
-    private var players: Array<Player> = arrayOf(player1, player2)
-    private var attackerId: Int = 0
-        set(value) {
-            field = value
-            attacker.role = Player.Role.ATTACK
-            defender.role = Player.Role.DEFENCE
-        }
     private var gameDice: Dice = Dice(6)
-    private val attacker: Player
-        get() = players[attackerId]
-    private val defender: Player
-        get() = players[1 - attackerId]
+    private val playersList: List<Player> = listOf(attackPlayer, defencePlayer)
+    private val startingPlayer = attackPlayer // needed for switching sides after rounds
 
     init {
-        statistics.setup(players)
+        statistics.setup(playersList)
+        attackPlayer.role = Player.Role.ATTACK
+        defencePlayer.role = Player.Role.DEFENCE
     }
 
-    private fun getOpponent(player: Player): Player {
-        if (player.role == Player.Role.ATTACK) return defender
-        return attacker
+    private fun opponent(player: Player): Player {
+        if (player == attackPlayer) return defencePlayer
+        return attackPlayer
     }
 
     private fun switchSides() {
-        attackerId = 1 - attackerId
+        attackPlayer = defencePlayer.also { defencePlayer = attackPlayer }
+        attackPlayer.role = Player.Role.ATTACK
+        defencePlayer.role = Player.Role.DEFENCE
     }
 
     fun play(rounds: Int, dice: Dice = Dice(6)) {
@@ -63,29 +58,35 @@ class BlitzGame(
     }
 
     private fun firstPart() {
-        attacker.rollDice(gameDice)
-        defender.rollDice(gameDice)
+        attackPlayer.rollDice(gameDice)
+        defencePlayer.rollDice(gameDice)
     }
 
     private fun prepareSides(round: Int) {
-        attackerId = 1 - (round) % 2
-        attacker.role = Player.Role.ATTACK
-        defender.role = Player.Role.DEFENCE
+        if ((1 - (round) % 2 != 0 && attackPlayer == startingPlayer)
+            || (1 - (round) % 2 == 0 && attackPlayer != startingPlayer)
+        ) {
+            switchSides()
+        } else {
+            attackPlayer.role = Player.Role.ATTACK
+            defencePlayer.role = Player.Role.DEFENCE
+        }
+
     }
 
     private fun secondPart() {
-        optionalMove(attacker)
-        optionalMove(defender)
+        optionalMove(attackPlayer)
+        optionalMove(defencePlayer)
     }
 
     private fun decideWinner() {
-        if (attacker.roll >= defender.roll) attacker.addPoint()
-        else defender.addPoint()
+        if (attackPlayer.roll >= defencePlayer.roll) attackPlayer.addPoint()
+        else defencePlayer.addPoint()
     }
 
     private fun summarizeRound(): Boolean {
         var endGame = false
-        for (player in players) {
+        for (player in playersList) {
             if (player.points >= pointToWin) {
                 endGame = true
                 statistics.addWin(player)
@@ -95,25 +96,30 @@ class BlitzGame(
     }
 
     private fun optionalMove(player: Player) {
-        val opponent: Player = getOpponent(player)
-        player.reRoll(
-            opponentPoints = opponent.points,
-            numberOfDiceSides = gameDice.sides,
+        val opponent = opponent(player)
+        val gameState = PlayerGameState(
+            playerRole = player.role!!,
+            playerRoll = player.roll,
             opponentRoll = opponent.roll,
-            pointsToWin = pointToWin,
+            numberOfDiceSides = gameDice.sides,
+            playerPoints = player.points,
+            opponentPoints = opponent.points,
+            pointsToWin = pointToWin
+        )
+        player.reRoll(
+            gameState,
             dice = gameDice
         )
     }
 
     fun restart() {
         restartPlayers()
-        attackerId = 0
         statistics.clear()
-        statistics.setup(players)
+        statistics.setup(playersList)
     }
 
     private fun restartPlayers() {
-        for (player in players) {
+        for (player in playersList) {
             player.newGame()
         }
     }
