@@ -38,11 +38,12 @@ class GameStatistics {
         games = 0
     }
 
-    override fun toString(): String {
+    override fun toString(): String =
         if (empty)
-            return "No games were played"
-        return "Statistics of $games games:\n" +
-                statsMapToString("Roles", roleWins) +
-                statsMapToString("Players", playerWins)
-    }
+            "No games were played"
+        else
+            "Statistics of $games games:\n" +
+                    statsMapToString("Roles", roleWins) +
+                    statsMapToString("Players", playerWins)
+
 }
