@@ -18,6 +18,10 @@ class ParagraphScope(){
         content += HeaderScope(level).apply(action).header
     }
 
+    fun code(multiline: Boolean, action: CodeScope.() -> Unit) {
+        content += CodeScope(multiline).apply(action).code
+    }
+
     fun bold(action: BoldText.() -> Unit) {
         content += BoldText().apply(action).text
     }

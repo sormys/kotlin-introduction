@@ -1,109 +1,65 @@
 package pl.edu.mimuw
-
-import pl.edu.mimuw.lists.BulletPointScope
-import pl.edu.mimuw.lists.ListScope
-import pl.edu.mimuw.textHighlight.BoldText
-import pl.edu.mimuw.textHighlight.ItalicText
 import java.io.File
-
-
-@DslMarker
-annotation class SMDDsl
-
-@SMDDsl
-class SMDBuilder{
-    var content: String = ""
-
-    fun build(): String = content
-    fun header(level: Int, action: HeaderScope.() -> Unit){
-        content += HeaderScope(level).apply(action).header
-    }
-
-    fun paragraph(action: ParagraphScope.() -> Unit) {
-        content += ParagraphScope().apply(action).paragraph
-    }
-
-    fun bullet(action: BulletPointScope.() -> Unit) {
-        content += BulletPointScope().apply(action).bulletPoints
-    }
-
-    fun list(action: ListScope.() -> Unit) {
-        content += ListScope().apply(action).content
-    }
-
-    fun code(multiline: Boolean, action: CodeScope.() -> Unit) {
-        content += CodeScope(multiline).apply(action).code
-    }
-
-    fun bold(action: BoldText.() -> Unit) {
-        content += BoldText().apply(action).text
-    }
-
-    fun italic(action: ItalicText.() -> Unit) {
-        content += ItalicText().apply(action).text
-    }
-
-    fun delimiter() {
-        content += "\n---\n"
-    }
-}
-
-fun buildSMD(action: SMDBuilder.() -> Unit): String =
-    SMDBuilder().apply(action).build()
-
 
 fun main() {
     println("Hello Kotlin!")
     Hello().greet()
     val path = readln()
     File(path).writeText(buildSMD {
-        header(1) {
-            +"Lorem Ipsum"
+        header(1){
+            +"Lorem ipsum"
+        }
+        header(2){
+            +"dolor sit amet"
         }
         paragraph {
-            header(2) {
-                +"Lorem d"
-            }
-            bold {
-                +"dane "
-                italic {
-                    +"hejo"
-                    bold {
-                        +"\n\n\neleo"
-                    }
-                }
-                +" elo"
-            }
+            +("Lorem ipsum dolor sit amet, consectetur adipiscing elit,\n" +
+                    "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
         }
-        bullet{
+        paragraph {
+            +("Ut enim ad minim veniam, quis nostrud exercitation ullamco " +
+                    "laboris nisi ut aliquip ex ea commodo consequat.")
+        }
+        bullet {
             item{
-                +"test"
+                +"Duis aute irure"
             }
             item{
-                bold{
-                    +"tescior"
-                }
+                +"dolor in reprehenderit"
             }
         }
-        list{
+        list {
             item{
-                +"test"
+                +"in voluptate velit esse"
             }
-            item{
-                bold{
-                    +"tescior"
-                }
+            item {
+                +"cillum dolore eu fugiat nulla pariatur"
             }
-        }
-        code(false) {
-            +"lorem"
-        }
-        code(true){
-            +"dfal;kjlkfdaj \n sakjfdjlk"
         }
         delimiter()
-        italic {
-            +"\ndane"
+        paragraph {
+            +"Excepteur "
+            italic {
+                +"sint"
+            }
+            +" occaecat "
+            bold{
+                +"cupid\n atat"
+            }
+            +" non "
+            bold{
+                italic{
+                    +"proident"
+                }
+            }
+            +","
+            code(false){
+                +"sunt in culpa"
+            }
+            code(true){
+                +("qui officia deserunt\n" +
+                        "mollit anim id est laborum.")
+            }
         }
     })
 }
