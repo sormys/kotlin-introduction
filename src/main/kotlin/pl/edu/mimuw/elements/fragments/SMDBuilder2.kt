@@ -1,8 +1,8 @@
 package pl.edu.mimuw.elements.fragments
 
-import pl.edu.mimuw.SMDDsl2
 import pl.edu.mimuw.elements.Header1
 import pl.edu.mimuw.elements.Header2
+import pl.edu.mimuw.elements.SMDDsl2
 import pl.edu.mimuw.elements.TextElement
 
 @SMDDsl2

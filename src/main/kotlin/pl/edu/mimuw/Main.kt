@@ -1,4 +1,5 @@
 package pl.edu.mimuw
+import pl.edu.mimuw.elements.buildSMD
 import java.io.File
 
 fun main() {
