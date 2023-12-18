@@ -1,5 +1,6 @@
 package pl.edu.mimuw
 
+import pl.edu.mimuw.elements.fragments.SMDBuilder2
 import pl.edu.mimuw.lists.BulletPointScope
 import pl.edu.mimuw.lists.ListScope
 import pl.edu.mimuw.textHighlight.BoldText
@@ -46,5 +47,5 @@ class SMDBuilder{
     }
 }
 
-fun buildSMD(action: SMDBuilder.() -> Unit): String =
-    SMDBuilder().apply(action).build()
+fun buildSMD(action: SMDBuilder2.() -> Unit): String =
+    SMDBuilder2().apply(action).build()

@@ -6,15 +6,16 @@ fun main() {
     Hello().greet()
     val path = readln()
     File(path).writeText(buildSMD {
-        header(1){
+        header1{
             +"Lorem ipsum"
         }
-        header(2){
+        header2{
             +"dolor sit amet"
         }
         paragraph {
-            +("Lorem ipsum dolor sit amet, consectetur adipiscing elit,\n" +
-                    "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+            +"Lorem ipsum dolor sit amet, consectetur adipiscing elit,"
+            br()
+            + "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         }
         paragraph {
             +("Ut enim ad minim veniam, quis nostrud exercitation ullamco " +
@@ -53,10 +54,10 @@ fun main() {
                 }
             }
             +","
-            code(false){
+            codeInline{
                 +"sunt in culpa"
             }
-            code(true){
+            codeMultiLine{
                 +("qui officia deserunt\n" +
                         "mollit anim id est laborum.")
             }
