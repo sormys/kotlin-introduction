@@ -1,6 +1,5 @@
 package pl.edu.mimuw.elements.fragments
 
-import pl.edu.mimuw.elements.TextElement
 
 class Paragraph : Fragment() {
     override fun startFragment(builder: StringBuilder) {

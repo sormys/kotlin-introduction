@@ -1,6 +1,6 @@
 package pl.edu.mimuw.elements.lists
 
-import pl.edu.mimuw.elements.SMDDsl2
+import pl.edu.mimuw.elements.SMDDsl
 import pl.edu.mimuw.elements.SMDElement
 import pl.edu.mimuw.elements.TextElement
 import pl.edu.mimuw.elements.highlight.Bold
@@ -8,7 +8,7 @@ import pl.edu.mimuw.elements.highlight.CodeInline
 import pl.edu.mimuw.elements.highlight.CodeMultiLine
 import pl.edu.mimuw.elements.highlight.Italic
 
-@SMDDsl2
+@SMDDsl
 class Item : SMDElement() {
 
     override fun render(builder: StringBuilder) = children.forEach {

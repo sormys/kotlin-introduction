@@ -2,11 +2,8 @@ package pl.edu.mimuw.elements.fragments
 
 import pl.edu.mimuw.elements.Header1
 import pl.edu.mimuw.elements.Header2
-import pl.edu.mimuw.elements.SMDDsl2
-import pl.edu.mimuw.elements.TextElement
 
-@SMDDsl2
-class SMDBuilder2 : Fragment() {
+class SMDBuilder : Fragment() {
     override fun startFragment(builder: StringBuilder) {}
 
     override fun endFragment(builder: StringBuilder) {}

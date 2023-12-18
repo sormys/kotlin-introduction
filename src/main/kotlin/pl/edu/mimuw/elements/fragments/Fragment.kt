@@ -3,7 +3,7 @@ package pl.edu.mimuw.elements.fragments
 import pl.edu.mimuw.elements.BreakLine
 import pl.edu.mimuw.elements.lists.BulletPoint
 import pl.edu.mimuw.elements.lists.NumberList
-import pl.edu.mimuw.elements.SMDDsl2
+import pl.edu.mimuw.elements.SMDDsl
 import pl.edu.mimuw.elements.SMDElement
 import pl.edu.mimuw.elements.TextElement
 import pl.edu.mimuw.elements.highlight.Bold
@@ -11,7 +11,7 @@ import pl.edu.mimuw.elements.highlight.CodeInline
 import pl.edu.mimuw.elements.highlight.CodeMultiLine
 import pl.edu.mimuw.elements.highlight.Italic
 
-@SMDDsl2
+@SMDDsl
 abstract class Fragment() : SMDElement() {
 
     abstract fun startFragment(builder: StringBuilder)

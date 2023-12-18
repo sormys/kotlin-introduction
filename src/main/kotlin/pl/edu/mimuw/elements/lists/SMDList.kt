@@ -1,9 +1,9 @@
 package pl.edu.mimuw.elements.lists
 
-import pl.edu.mimuw.elements.SMDDsl2
+import pl.edu.mimuw.elements.SMDDsl
 import pl.edu.mimuw.elements.SMDElement
 
-@SMDDsl2
+@SMDDsl
 abstract class SMDList(private val tagLambda: (Int) -> String) : SMDElement() {
 
     override fun render(builder: StringBuilder) =

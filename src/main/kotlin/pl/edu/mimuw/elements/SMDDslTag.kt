@@ -1,9 +1,9 @@
 package pl.edu.mimuw.elements
 
-import pl.edu.mimuw.elements.fragments.SMDBuilder2
+import pl.edu.mimuw.elements.fragments.SMDBuilder
 
 @DslMarker
-annotation class SMDDsl2
+annotation class SMDDsl
 
-fun buildSMD(action: SMDBuilder2.() -> Unit) =
-    SMDBuilder2().apply(action).build()
+fun buildSMD(action: SMDBuilder.() -> Unit) =
+    SMDBuilder().apply(action).build()
