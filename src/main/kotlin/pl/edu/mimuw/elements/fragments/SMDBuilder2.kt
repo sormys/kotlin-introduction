@@ -6,14 +6,10 @@ import pl.edu.mimuw.elements.SMDDsl2
 import pl.edu.mimuw.elements.TextElement
 
 @SMDDsl2
-class SMDBuilder2: Fragment() {
+class SMDBuilder2 : Fragment() {
     override fun startFragment(builder: StringBuilder) {}
 
     override fun endFragment(builder: StringBuilder) {}
-
-    operator fun String.unaryPlus() {
-        children.add(TextElement(this))
-    }
 
     fun paragraph(init: Paragraph.() -> Unit) = initTag(Paragraph(), init)
 

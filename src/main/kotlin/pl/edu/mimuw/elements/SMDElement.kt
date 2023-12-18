@@ -14,4 +14,6 @@ abstract class SMDElement : Element {
         render(builder)
         return builder.toString()
     }
+
+    fun br() = children.add(BreakLine())
 }

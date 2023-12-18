@@ -1,15 +1,15 @@
 package pl.edu.mimuw.elements.fragments
 
 import pl.edu.mimuw.elements.BreakLine
+import pl.edu.mimuw.elements.lists.BulletPoint
+import pl.edu.mimuw.elements.lists.NumberList
+import pl.edu.mimuw.elements.SMDDsl2
+import pl.edu.mimuw.elements.SMDElement
+import pl.edu.mimuw.elements.TextElement
 import pl.edu.mimuw.elements.highlight.Bold
 import pl.edu.mimuw.elements.highlight.CodeInline
 import pl.edu.mimuw.elements.highlight.CodeMultiLine
 import pl.edu.mimuw.elements.highlight.Italic
-import pl.edu.mimuw.elements.Lists.BulletPoint
-import pl.edu.mimuw.elements.Lists.NumberList
-import pl.edu.mimuw.elements.SMDDsl2
-import pl.edu.mimuw.elements.SMDElement
-import pl.edu.mimuw.elements.TextElement
 
 @SMDDsl2
 abstract class Fragment() : SMDElement() {
@@ -26,6 +26,9 @@ abstract class Fragment() : SMDElement() {
         endFragment(builder)
     }
 
+    operator fun String.unaryPlus() =
+        children.add(TextElement(this))
+
     fun italic(init: Italic.() -> Unit) = initTag(Italic(), init)
 
     fun bold(init: Bold.() -> Unit) = initTag(Bold(), init)
@@ -39,6 +42,4 @@ abstract class Fragment() : SMDElement() {
     fun bullet(init: BulletPoint.() -> Unit) = initTag(BulletPoint(), init)
 
     fun delimiter() = children.addAll(listOf(BreakLine(), TextElement("---"), BreakLine()))
-
-    fun br() = children.add(BreakLine())
 }

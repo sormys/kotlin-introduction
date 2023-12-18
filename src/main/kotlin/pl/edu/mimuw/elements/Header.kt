@@ -4,7 +4,7 @@ import pl.edu.mimuw.elements.highlight.Bold
 import pl.edu.mimuw.elements.highlight.CodeInline
 import pl.edu.mimuw.elements.highlight.Italic
 
-sealed class Header(private val tag: String): SMDElement() {
+sealed class Header(private val tag: String) : SMDElement() {
     override fun render(builder: StringBuilder) {
         for (c in children) {
             c.render(builder)

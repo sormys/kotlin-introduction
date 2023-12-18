@@ -10,9 +10,4 @@ class Paragraph : Fragment() {
     override fun endFragment(builder: StringBuilder) {
         builder.append("\n\n")
     }
-
-    operator fun String.unaryPlus() {
-        children.add(TextElement(this))
-    }
-
 }

@@ -3,9 +3,7 @@ package pl.edu.mimuw.elements.highlight
 import pl.edu.mimuw.elements.TextElement
 
 abstract class TextHighlight(tag: String) : Tag(tag) {
-    operator fun String.unaryPlus() {
-        children.add(TextElement(this))
-    }
+    operator fun String.unaryPlus() = children.add(TextElement(this))
 }
 
 class Bold : TextHighlight("**") {
@@ -18,4 +16,4 @@ class Italic : TextHighlight("*") {
 
 class CodeInline : TextHighlight("`")
 
-class CodeMultiLine: TextHighlight("\n```\n")
+class CodeMultiLine : TextHighlight("\n```\n")
