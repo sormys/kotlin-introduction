@@ -1,6 +1,10 @@
 package pl.edu.mimuw
 
+import pl.edu.mimuw.game.Board
+import pl.edu.mimuw.game.Seega
+
 fun main() {
-    println("Hello Kotlin!")
-    Hello().greet()
+    Seega.prepareGame(Board.BoardSize.SMALL)
+    Seega.play()
+    Seega.resetGame()
 }
