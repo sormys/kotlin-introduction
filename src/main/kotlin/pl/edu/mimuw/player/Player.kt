@@ -26,7 +26,7 @@ class Player(private val color: Color) {
                 if (state.stage == Seega.Stage.PLACING) ""
                 else " (${Move.Direction.entries.joinToString("|") { it.direction }})"
         val regex = Regex("^$requiredInput$")
-        require(regex.matches(input)) { "Invalid input!, expected: $requiredInput\n Current stage: ${state.stage}" }
+        require(regex.matches(input)) { "Invalid input! Expected: $requiredInput" }
     }
 
     private fun getUserInput(state: GameState): String {

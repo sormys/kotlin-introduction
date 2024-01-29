@@ -121,8 +121,8 @@ class Board(val size: BoardSize) {
     fun validateMove(move: Move): Boolean =
         (Position.isNone(move.from) && !isCentral(move.to)
                 || (checkField(move.from, mapPlayerToField(move.playerColor))
-                    && move.from.isNeighbour(move.to)))
-        && checkField(move.to, Field.EMPTY)
+                && move.from.isNeighbour(move.to)))
+                && checkField(move.to, Field.EMPTY)
 
     fun checkRange(position: Position): Boolean =
         position.isValid(size.dimension())

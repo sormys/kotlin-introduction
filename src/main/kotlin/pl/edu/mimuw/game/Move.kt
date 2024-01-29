@@ -30,6 +30,5 @@ data class Move(
             }
             return Move(stage, from, to, playerColor)
         }
-
     }
 }
