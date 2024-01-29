@@ -38,6 +38,7 @@ dependencies {
     testImplementation(Dependencies.Kotest.runner)
     testImplementation(Dependencies.Kotest.assertions)
     testImplementation(Dependencies.Kotest.property)
+    testImplementation(kotlin("test"))
 }
 
 tasks.test {

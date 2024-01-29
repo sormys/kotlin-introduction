@@ -119,10 +119,11 @@ class Board(val size: BoardSize) {
 
     fun validateMove(move: Move): Boolean =
         (Position.isNone(move.from) && !isCentral(move.to)
-                || checkField(move.from, mapPlayerToField(move.playerColor)))
-                && checkField(move.to, Field.EMPTY)
+                || (checkField(move.from, mapPlayerToField(move.playerColor))
+                    && move.from.isNeighbour(move.to)))
+        && checkField(move.to, Field.EMPTY)
 
-    private fun checkRange(position: Position): Boolean =
+    fun checkRange(position: Position): Boolean =
         position.isValid(size.dimension())
 
     fun isCentral(position: Position): Boolean =

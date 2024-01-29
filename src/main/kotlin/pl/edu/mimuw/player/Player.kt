@@ -35,15 +35,7 @@ class Player(private val color: Color) {
         return input
     }
 
-    fun playMove(state: GameState): Move {
-        while (true) {
-            try {
-                val input = getUserInput(state)
-                return Move.fromString(input, state.stage, this.color)
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-            }
-        }
-    }
+    fun playMove(state: GameState): Move =
+        Move.fromString(getUserInput(state), state.stage, this.color)
 
 }

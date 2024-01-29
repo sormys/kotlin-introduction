@@ -20,7 +20,7 @@ object Seega {
     }
 
     fun play() {
-        require(!GameState.isEmpty(state)) { "Game not prepared! Please call prepareGame() first" }
+        check(!GameState.isEmpty(state)) { "Game not prepared! Please call prepareGame() first" }
         var captured: Boolean
         println(state)
         while (true) {
@@ -89,6 +89,8 @@ object Seega {
         val player = players[state.currentPlayer]
         return player!!.playMove(state)
     }
+
+    fun getGameState(): GameState = state.copy()
 
     fun resetGame() {
         state = GameState.empty

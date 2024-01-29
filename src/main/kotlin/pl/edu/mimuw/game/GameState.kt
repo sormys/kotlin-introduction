@@ -2,23 +2,24 @@ package pl.edu.mimuw.game
 
 import pl.edu.mimuw.player.Player
 
-class GameState(boardSize: Board.BoardSize) {
+data class GameState(
+    val board: Board,
+    var stage: Seega.Stage,
+    var currentPlayer: Player.Color,
+    var moves: Int,
+    var noCapture: Int
+) {
+    constructor(boardSize: Board.BoardSize) :
+            this(Board(boardSize),
+                Seega.Stage.PLACING,
+                Player.Color.WHITE,
+                0,
+                0)
 
-    val board = Board(boardSize)
-    var stage = Seega.Stage.PLACING
-        private set
-    var currentPlayer: Player.Color = Player.Color.WHITE
-
-    private var moves: Int = 0
-
-    private var noCapture: Int = 0
-
-    override fun toString(): String {
-        return if (!isFinished())
+    override fun toString(): String = if (!isFinished())
             "$board Current stage: $stage\n Current player: $currentPlayer"
         else
             "$board\nGame finished! Winner: ${winner()}"
-    }
 
     private fun nextStage() {
         require(stage == Seega.Stage.PLACING) { "Cannot advance to next stage, current stage: $stage" }
@@ -52,9 +53,9 @@ class GameState(boardSize: Board.BoardSize) {
             nextStage()
     }
 
-    fun isFinished(): Boolean =
-        stage == Seega.Stage.MOVING
+    fun isFinished(): Boolean = stage == Seega.Stage.MOVING
                 && (board.pawnsCount(currentPlayer) == 0
+                || board.pawnsCount(currentPlayer.other()) == 0
                 || noCapture >= 20)
 
 
@@ -67,11 +68,15 @@ class GameState(boardSize: Board.BoardSize) {
         else
             currentPlayer.other()
     }
-
     companion object {
-        val empty = GameState(Board.BoardSize.SMALL)
+        val empty by lazy {
+            val state = GameState(Board.BoardSize.SMALL)
+            state.moves = -1
+            state.noCapture = -1
+            state
+        }
 
-        fun isEmpty(state: GameState): Boolean = state === empty
+        fun isEmpty(state: GameState): Boolean = state == empty
 
         fun startingPawns(boardSize: Board.BoardSize): Int =
             when (boardSize) {
@@ -80,5 +85,4 @@ class GameState(boardSize: Board.BoardSize) {
                 Board.BoardSize.LARGE -> 40
             }
     }
-
 }

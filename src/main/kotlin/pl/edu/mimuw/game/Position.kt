@@ -17,7 +17,10 @@ data class Position(
         }
     }
 
-    override fun toString() = if (isNone()) "None" else "${'a' + row}${column}"
+    fun isNeighbour(position: Position): Boolean =
+        position in Move.Direction.entries.map { moveDirection(it) }
+
+    override fun toString() = if (isNone()) "None" else "${'a' + column}${row+1}"
 
     fun isValid(range: Int): Boolean =
         row in 0 until range && column in 0 until range
