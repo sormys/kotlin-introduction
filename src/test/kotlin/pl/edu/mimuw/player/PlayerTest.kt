@@ -4,6 +4,8 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import pl.edu.mimuw.board.Board
+import pl.edu.mimuw.board.Position
 import pl.edu.mimuw.game.*
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream

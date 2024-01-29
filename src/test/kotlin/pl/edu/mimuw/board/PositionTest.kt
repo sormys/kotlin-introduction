@@ -1,7 +1,8 @@
-package pl.edu.mimuw.game
+package pl.edu.mimuw.board
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.assertThrows
+import pl.edu.mimuw.game.Move
 import kotlin.test.Test
 
 class PositionTest {

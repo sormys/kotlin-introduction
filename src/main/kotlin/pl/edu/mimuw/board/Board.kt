@@ -1,5 +1,6 @@
-package pl.edu.mimuw.game
+package pl.edu.mimuw.board
 
+import pl.edu.mimuw.game.Move
 import pl.edu.mimuw.player.Player
 
 class Board(val size: BoardSize) {

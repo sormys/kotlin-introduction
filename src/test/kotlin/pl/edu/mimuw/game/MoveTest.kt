@@ -2,6 +2,7 @@ package pl.edu.mimuw.game
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.assertThrows
+import pl.edu.mimuw.board.Position
 import pl.edu.mimuw.player.Player
 import kotlin.test.Test
 

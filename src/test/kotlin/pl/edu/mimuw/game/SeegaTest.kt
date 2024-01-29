@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.TestFactory
 import org.junit.jupiter.api.assertThrows
+import pl.edu.mimuw.board.Board
 import pl.edu.mimuw.player.Player
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

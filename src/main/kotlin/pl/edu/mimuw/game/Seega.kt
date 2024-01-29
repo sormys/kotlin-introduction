@@ -1,5 +1,7 @@
 package pl.edu.mimuw.game
 
+import pl.edu.mimuw.board.Board
+import pl.edu.mimuw.board.Position
 import pl.edu.mimuw.player.Player
 
 object Seega {

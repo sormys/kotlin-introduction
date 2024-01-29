@@ -1,4 +1,6 @@
-package pl.edu.mimuw.game
+package pl.edu.mimuw.board
+
+import pl.edu.mimuw.game.Move
 
 data class Position(
     val row: Int,

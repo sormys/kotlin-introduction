@@ -1,5 +1,6 @@
 package pl.edu.mimuw.game
 
+import pl.edu.mimuw.board.Board
 import pl.edu.mimuw.player.Player
 
 data class GameState(
@@ -10,7 +11,8 @@ data class GameState(
     var noCapture: Int
 ) {
     constructor(boardSize: Board.BoardSize) :
-            this(Board(boardSize),
+            this(
+                Board(boardSize),
                 Seega.Stage.PLACING,
                 Player.Color.WHITE,
                 0,

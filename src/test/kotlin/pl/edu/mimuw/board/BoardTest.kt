@@ -1,8 +1,10 @@
-package pl.edu.mimuw.game
+package pl.edu.mimuw.board
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
+import pl.edu.mimuw.game.Move
+import pl.edu.mimuw.game.Seega
 import pl.edu.mimuw.player.Player
 
 class BoardTest {
